@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.main-container {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
