@@ -1,0 +1,7 @@
+<form [formGroup]="signInForm" (submit)="submit()" class="d-flex flex-column">
+  <input type="text" class="form-control my-1" formControlName="userName" placeholder="User Name">
+  <input type="email" class="form-control my-1" formControlName="email" placeholder="Email">
+  <input type="" class="form-control my-1" formControlName="password" placeholder="Password">
+  <a [routerLink]="['login']">Log-in</a>
+  <button class="btn btn-primary my-1" type="submit">Submit</button>
+</form>

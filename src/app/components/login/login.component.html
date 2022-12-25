@@ -1,5 +1,6 @@
-<form class="mt-5">
-  <input type="text" name="userName" class="form-control" formControlName="userName" placeholder="User Name">
-  <input type="password" name="password" class="form-control" formControlName="password" placeholder="Password">
-  <button class="btn btn-primary">submit</button>
+<form [formGroup]="loginForm" (submit)="submit()">
+  <input type="text" name="userName" class="form-control my-1" formControlName="email" placeholder="Email">
+  <input type="password" name="password" class="form-control my-1" formControlName="password" placeholder="Password">
+  <button class="btn btn-success my-1" (click)="signIn()">Sign-in</button>
+  <button class="btn btn-primary my-1" type="submit">Submit</button>
 </form>
