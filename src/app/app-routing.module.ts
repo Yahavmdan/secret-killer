@@ -3,14 +3,12 @@ import { RouterModule, Routes } from "@angular/router";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login/login.component";
-import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
   },
   {
     path: 'signin',

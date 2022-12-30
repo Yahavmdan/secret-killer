@@ -1,7 +1,9 @@
-<form [formGroup]="signInForm" (submit)="submit()" class="d-flex flex-column">
-  <input type="text" class="form-control my-1" formControlName="userName" placeholder="User Name">
-  <input type="email" class="form-control my-1" formControlName="email" placeholder="Email">
+<form [formGroup]="signInForm" (submit)="submit()" class="form-container">
+  <input type="text" class="form-control my-2" formControlName="userName" placeholder="User Name">
+  <input type="email" class="form-control my-2" formControlName="email" placeholder="Email">
   <input type="" class="form-control my-1" formControlName="password" placeholder="Password">
-  <a [routerLink]="['login']">Log-in</a>
-  <button class="btn btn-primary my-1" type="submit">Submit</button>
+  <div class="d-flex align-items-center">
+    <button class="button-layout bg-blue my-1" type="submit">Submit</button>
+    <div class="my-1 pointer f-14 text-blue mx-1" (click)="navigate()">Log-in</div>
+  </div>
 </form>

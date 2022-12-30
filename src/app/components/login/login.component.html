@@ -1,6 +1,8 @@
-<form [formGroup]="loginForm" (submit)="submit()">
-  <input type="text" name="userName" class="form-control my-1" formControlName="email" placeholder="Email">
-  <input type="password" name="password" class="form-control my-1" formControlName="password" placeholder="Password">
-  <button class="btn btn-success my-1" (click)="signIn()">Sign-in</button>
-  <button class="btn btn-primary my-1" type="submit">Submit</button>
+<form [formGroup]="loginForm" (submit)="submit()" class="form-container">
+  <input type="text" name="userName" class="my-2 col-4 form-control" formControlName="email" placeholder="Email">
+  <input type="password" name="password" class="my-2 col-4 form-control" formControlName="password" placeholder="Password">
+  <div class="d-flex align-items-center">
+    <button class="button-layout bg-blue my-1" type="submit">Submit</button>
+    <div class="my-1 pointer f-14 text-blue mx-1" (click)="signIn()">Sign-in</div>
+  </div>
 </form>

@@ -2,6 +2,25 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+///////////////// variables /////////////////
+/////////////////////////////////////////////
+
+$green: #6ecca1;
+$light-green: #9fccb8;
+$yellow: #ffcc5c;
+$light-yellow: #ffc980;
+$red: #fc5751;
+$light-red: #ff918c;
+$blue: #7bb4d5;
+$light-blue: #9dbbcb;
+$black: #1e1e1e;
+$grey: #333333;
+$light-grey: #5e5e5e;
+$lighter-grey: #9f9f9f;
+$very-light-grey: #d2d2d2;
+$very-lighter-grey: #f6f6f6;
+$white: #ffffff;
+
 ///////////////// scrollbar /////////////////
 /////////////////////////////////////////////
 
@@ -23,22 +42,176 @@
   border-radius: 10px;
   border: 3px solid #ffffff;
 }
-
 ////////////// main container ////////////////
 /////////////////////////////////////////////
 
 .main-container {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  padding: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
-.items-container {
-  width: 80%;
+///////////////// helpers ///////////////////
+/////////////////////////////////////////////
+
+.blur-overlay {
+  position: fixed;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.13);
 }
 
 .pointer {
-  background-color: aqua;
-  cursor:pointer;
+  cursor: pointer;
+}
+
+.button-layout {
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  border-radius: 10px 10px 10px 10px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}.button-layout:hover {
+   color: #3b3b3b;
+   background-color: rgba(0, 0, 0, 0.3) !important;
+   box-shadow: 0 5px 20px 0 #c5c5c5;
+ }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form-container {
+  background-color: #fafffe;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 15px 29px 0 #DBDBDB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/////////// background-colors ///////////////
+/////////////////////////////////////////////
+
+.bg-red {background-color: $red;}
+.bg-light-red {background-color: $light-red;}
+.bg-green {background-color: $green;}
+.bg-light-green {background-color: $light-green;}
+.bg-yellow {background-color: $yellow;}
+.bg-light-yellow {background-color: $light-yellow;}
+.bg-blue {background-color: $blue;}
+.bg-light-blue {background-color: $light-blue;}
+.bg-black {background-color: $black;}
+.bg-grey {background-color: $grey;}
+.bg-light-grey {background-color: $light-grey;}
+.bg-lighter-grey {background-color: $lighter-grey;}
+.bg-white {background-color: $white;}
+
+///////////////// colors ////////////////////
+/////////////////////////////////////////////
+
+.text-red {color: $red;}
+.text-light-red {color: $light-red;}
+.text-green {color: $green;}
+.text-light-green {color: $light-green;}
+.text-yellow {color: $yellow;}
+.text-light-yellow {color: $light-yellow;}
+.text-blue {color: $blue;}
+.text-light-blue {color: $light-blue;}
+.text-black {color: $black;}
+.text-grey {color: $grey;}
+.text-light-grey {color: $light-grey;}
+.text-lighter-grey {color: $lighter-grey;}
+.text-white {color: $white;}
+
+///////////////// fonts /////////////////////
+/////////////////////////////////////////////
+
+.f-8 {font-size: 8px;}
+.f-10 {font-size: 10px;}
+.f-12 {font-size: 12px;}
+.f-14 {font-size: 14px;}
+.f-16 {font-size: 16px;}
+.f-18 {font-size: 18px;}
+.f-20 {font-size: 20px;}
+.f-22 {font-size: 22px;}
+.f-24 {font-size: 24px;}
+.f-26 {font-size: 26px;}
+.f-28 {font-size: 28px;}
+
+////////////// media queries ////////////////
+/////////////////////////////////////////////
+
+@media (max-width: 992px) {
+  .f-lg-8 {font-size: 8px;}
+  .f-lg-10 {font-size: 10px;}
+  .f-lg-12 {font-size: 12px;}
+  .f-lg-14 {font-size: 14px;}
+  .f-lg-16 {font-size: 16px;}
+  .f-lg-18 {font-size: 18px;}
+  .f-lg-20 {font-size: 20px;}
+  .f-lg-22 {font-size: 22px;}
+  .f-lg-24 {font-size: 24px;}
+  .f-lg-26 {font-size: 26px;}
+  .f-lg-28 {font-size: 28px;}
+}
+@media (max-width: 768px) {
+  .f-md-8 {font-size: 8px;}
+  .f-md-10 {font-size: 10px;}
+  .f-md-12 {font-size: 12px;}
+  .f-md-14 {font-size: 14px;}
+  .f-md-16 {font-size: 16px;}
+  .f-md-18 {font-size: 18px;}
+  .f-md-20 {font-size: 20px;}
+  .f-md-22 {font-size: 22px;}
+  .f-md-24 {font-size: 24px;}
+  .f-md-26 {font-size: 26px;}
+  .f-md-28 {font-size: 28px;}
+
+  .main-container {
+    margin-top: 3rem;
+  }
+}
+@media (max-width: 512px) {
+
+  .f-sm-8 {font-size: 8px;}
+  .f-sm-10 {font-size: 10px;}
+  .f-sm-12 {font-size: 12px;}
+  .f-sm-14 {font-size: 14px;}
+  .f-sm-16 {font-size: 16px;}
+  .f-sm-18 {font-size: 18px;}
+  .f-sm-20 {font-size: 20px;}
+  .f-sm-22 {font-size: 22px;}
+  .f-sm-24 {font-size: 24px;}
+  .f-sm-26 {font-size: 26px;}
+  .f-sm-28 {font-size: 28px;}
+
+  .items-container {
+    width: 100%;
+    padding: 0 1rem 0 1rem;
+  }
+
+  .button-layout {
+    font-size: 10px;
+  }
 }

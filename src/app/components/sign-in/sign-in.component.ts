@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +13,8 @@ export class SignInComponent implements OnInit {
   signInForm!: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,6 +30,10 @@ export class SignInComponent implements OnInit {
       return;
     }
     this.userService.signIn(this.signInForm.getRawValue());
+  }
+
+  navigate(): void {
+    void this.router.navigate(['login']);
   }
 
 }

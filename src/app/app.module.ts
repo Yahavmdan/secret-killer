@@ -8,13 +8,15 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HomeComponent } from './components/home/home.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { HttpClientModule } from "@angular/common/http";
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    SignInComponent
+    SignInComponent,
+    ChatComponent
   ],
 
   imports: [
