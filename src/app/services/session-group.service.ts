@@ -14,9 +14,7 @@ export class SessionGroupService {
     Authorization: `Bearer ${this.token}`,
   };
 
-  constructor(private httpClient: HttpClient) {
-    this.getSessionGroup();
-  }
+  constructor(private httpClient: HttpClient) {}
 
   get token(): string | null {
     return sessionStorage.getItem('token');

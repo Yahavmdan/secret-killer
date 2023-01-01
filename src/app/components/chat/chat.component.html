@@ -1,3 +1,20 @@
-<div>
-  aaaaaaaaaaaaaa
+<div class="d-flex flex-column" style="width: 380px;">
+  <span class="f-28">Chat</span>
+  <div class="list-group list-group-flush border-bottom bg-lighter-lighter-grey" style="height: 400px; border-radius: 5px;">
+    <div class="">
+      <div class="d-flex flex-column w-100 p-2" style="height: 400px; overflow-x: scroll;">
+        <div *ngFor="let message of messages">
+          <strong>{{message!['userName'] + ': '}}</strong>
+          <div>{{message!['message']}}</div>
+        </div>
+      </div>
+      <form [formGroup]="chatForm">
+        <input type="text"
+               placeholder="Write a message..."
+               formControlName="message"
+               class="form-control">
+        <button class="button-layout bg-blue mt-1" (click)="submit()">Click to send</button>
+      </form>
+    </div>
+  </div>
 </div>

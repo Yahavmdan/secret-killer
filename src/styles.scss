@@ -16,7 +16,7 @@ $light-blue: #9dbbcb;
 $black: #1e1e1e;
 $grey: #333333;
 $light-grey: #5e5e5e;
-$lighter-grey: #9f9f9f;
+$lighter-grey: #e5e5e5;
 $very-light-grey: #d2d2d2;
 $very-lighter-grey: #f6f6f6;
 $white: #ffffff;
@@ -125,6 +125,7 @@ $white: #ffffff;
 .bg-grey {background-color: $grey;}
 .bg-light-grey {background-color: $light-grey;}
 .bg-lighter-grey {background-color: $lighter-grey;}
+.bg-lighter-lighter-grey {background-color: $lighter-grey;}
 .bg-white {background-color: $white;}
 
 ///////////////// colors ////////////////////

@@ -19,9 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
               private sessionGroupService: SessionGroupService) {}
 
   ngOnInit(): void {
-    // @ts-ignore
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.getSessionGroups();
   }
 
   logout(): void {
@@ -30,7 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getSessionGroups(): void {
-    this.groups.push(this.sessionGroupService.getSessionGroup());
   }
 
   storeSessionGroup(): void {
