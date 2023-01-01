@@ -10,10 +10,10 @@ export class UserService {
 
   apiURL = environmentUrl.api;
 
-  //   header = {
-  //   Accept: 'application/json',
-  //   Authorization: `Bearer ${this.token}`,
-  // };
+    header = {
+    Accept: 'application/json',
+    Authorization: `Bearer ${this.token}`,
+  };
 
   constructor(private httpClient: HttpClient,
               private router: Router) {}
@@ -40,16 +40,27 @@ export class UserService {
       })
   }
 
-  login(data: {  password: string, userName: string }): void {
+  login(data: { password: string, userName: string }): void {
     this.httpClient.post(`${this.apiURL}/login`, data).toPromise()
       .then((res: any) => {
         sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('user', JSON.stringify(res.user));
         this.hasToken(res.token)
           .then(void this.router.navigate(['home']))
           .catch(err => {
             console.log(err.error.message)
           })
       })
+  }
+
+  storeSessionGroup(user: any): void {
+    this.httpClient.post(`${this.apiURL}/store/session`, user).toPromise()
+      .then((res: any) => res)
+  }
+
+  enterSessionGroup(user: any): void {
+    this.httpClient.post(`${this.apiURL}/enter/session`, user, { headers: this.header }).toPromise()
+      .then((res: any) => res)
   }
 
 }
