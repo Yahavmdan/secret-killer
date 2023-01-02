@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import Pusher from "pusher-js";
-import { HttpClient } from "@angular/common/http";
 import { ChatService } from "../../services/chat.service";
 
 @Component({
@@ -14,6 +13,9 @@ export class ChatComponent implements OnInit {
   user: any;
   messages = [];
   chatForm: FormGroup;
+  messageCounter = 30;
+  messageCountLimit = 0;
+  messageLimit = 30;
 
   constructor(private fb: FormBuilder,
               private chatService: ChatService) {
@@ -37,16 +39,38 @@ export class ChatComponent implements OnInit {
 
   initForm(): void {
     this.chatForm = this.fb.group({
-      'message' : [null, Validators.required],
+      'message' : [null, [Validators.maxLength(30), Validators.required]],
     })
   }
 
   submit(): void {
-    if (!this.chatForm.valid) {
+    if (this.chatForm.invalid) {
       return;
     }
+    this.messageCountLimit++
+
+    if (this.messageCountLimit === 6) {
+      this.limitMessage();
+      return;
+    }
+
     this.chatService.sendChat({userName: this.user['user_name'], message: this.chatForm.get('message')?.value })
       .subscribe(res => res)
     this.chatForm.get('message')?.reset()
   }
+
+  limitMessage() : void {
+    this.chatForm.get('message')?.reset();
+    this.chatForm.get('message')?.disable();
+    setTimeout(() => {
+      this.messageCountLimit = 0;
+      this.messageCounter = 30;
+      this.chatForm.get('message')?.enable();
+      clearInterval(interval);
+    }, 30000)
+    const interval = setInterval(() => {
+      this.messageCounter =  this.messageCounter - 1;
+    }, 1000)
+  }
+
 }

@@ -4,16 +4,35 @@
     <div class="">
       <div class="d-flex flex-column w-100 p-2" style="height: 400px; overflow-x: scroll;">
         <div *ngFor="let message of messages">
-          <strong>{{message!['userName'] + ': '}}</strong>
-          <div>{{message!['message']}}</div>
+          <div class="d-flex">
+            <div class="f-bold">{{message!['userName'] + ': '}}</div>
+            <div class="f-14 align-self-end f-lighter ml-1">{{message!['message']}}</div>
+          </div>
+          <div class="f-8">{{message!['time']}}</div>
         </div>
       </div>
+      <div
+        *ngIf="messageCountLimit === 6"
+        class="f-10 text-red">
+        The websocket that managing this chat is crap, so you are limited to 5 messages...<br>
+        you can go again in: <span class="f-bold f-12">{{messageCounter}}</span></div>
       <form [formGroup]="chatForm">
-        <input type="text"
-               placeholder="Write a message..."
-               formControlName="message"
-               class="form-control">
-        <button class="button-layout bg-blue mt-1" (click)="submit()">Click to send</button>
+        <div class="f-10 limit-text"
+             [ngClass]="{'text-red' : chatForm.get('message')!.value?.length > messageLimit}">
+          {{messageLimit}}/{{chatForm.get('message')!.value ? chatForm.get('message')!.value.length : 0}}
+        </div>
+        <div class="d-flex justify-content-between align-items-baseline">
+          <div class="col-12">
+            <input type="text"
+                   placeholder="Write a message..."
+                   formControlName="message"
+                   class="chat-text-area">
+          </div>
+          <button class="round-button-layout bg-blue col-1"
+          [disabled]="chatForm.invalid || messageCountLimit === 6"
+            (click)="submit()"><i class="bi bi-send"></i>
+          </button>
+        </div>
       </form>
     </div>
   </div>

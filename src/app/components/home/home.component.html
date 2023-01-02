@@ -1,6 +1,8 @@
 <button (click)="logout()" class="button-layout bg-red">Log-out</button>
 <button (click)="storeSessionGroup()" class="button-layout bg-blue">Create session</button>
-<app-chat></app-chat>
+<div style="margin-bottom: 100px;">
+  <app-chat></app-chat>
+</div>
 <div *ngFor="let group of groups">
   {{group}}
   {{group}}
