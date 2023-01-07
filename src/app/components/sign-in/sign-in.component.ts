@@ -33,7 +33,7 @@ export class SignInComponent implements OnInit {
   }
 
   navigate(): void {
-    void this.router.navigate(['login']);
+    void this.router.navigate(['']);
   }
 
 }

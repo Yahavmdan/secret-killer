@@ -1,39 +1,52 @@
-<div class="d-flex flex-column" style="width: 380px;">
-  <span class="f-28">Chat</span>
-  <div class="list-group list-group-flush border-bottom bg-lighter-lighter-grey" style="height: 400px; border-radius: 5px;">
-    <div class="">
-      <div class="d-flex flex-column w-100 p-2" style="height: 400px; overflow-x: scroll;">
-        <div *ngFor="let message of messages">
-          <div class="d-flex">
-            <div class="f-bold">{{message!['userName'] + ': '}}</div>
-            <div class="f-14 align-self-end f-lighter ml-1">{{message!['message']}}</div>
-          </div>
-          <div class="f-8">{{message!['time']}}</div>
+<div class="chat">
+  <div class="chat-body">
+    <div class="messages-container" id="messageContainer" #messageContainer (scroll)="scroll(messageContainer)">
+      <div *ngFor="let message of messages; let i = index"
+           [id]="i"
+           [ngClass]="message['userName'] == user['user_name'] ? 'own-chat-message' : 'chat-message'">
+        <div class="d-flex flex-column">
+          <div *ngIf="message['userName'] !== user['user_name']"
+               class="fw-700 f-16">{{message!['userName']}}</div>
+          <div class="message-body f-13 fw-400">{{message!['message']}}</div>
         </div>
+        <div class="f-9">{{message!['time']}}</div>
       </div>
-      <div
-        *ngIf="messageCountLimit === 6"
-        class="f-10 text-red">
-        The websocket that managing this chat is crap, so you are limited to 5 messages...<br>
-        you can go again in: <span class="f-bold f-12">{{messageCounter}}</span></div>
-      <form [formGroup]="chatForm">
-        <div class="f-10 limit-text"
-             [ngClass]="{'text-red' : chatForm.get('message')!.value?.length > messageLimit}">
-          {{messageLimit}}/{{chatForm.get('message')!.value ? chatForm.get('message')!.value.length : 0}}
-        </div>
-        <div class="d-flex justify-content-between align-items-baseline">
-          <div class="col-12">
-            <input type="text"
-                   placeholder="Write a message..."
-                   formControlName="message"
-                   class="chat-text-area">
-          </div>
-          <button class="round-button-layout bg-blue col-1"
-          [disabled]="chatForm.invalid || messageCountLimit === 6"
-            (click)="submit()"><i class="bi bi-send"></i>
-          </button>
-        </div>
-      </form>
     </div>
+    <button *ngIf="(messageContainer.scrollHeight - messageContainer.clientHeight) - messageContainer.scrollTop !>= 200"
+            class="round-button-layout bg-blue go-down-button ml-2 mt-2"
+            (click)="down(messageContainer)">
+      <span *ngIf="newMessages > 0"
+            class="notification-dot bg-red position-absolute mb-4 ml-4 f-10">
+        {{newMessages}}</span>
+      <i class="bi bi-chevron-double-down"></i>
+    </button>
+    <div
+      *ngIf="messageCountLimit === 5"
+      class="f-10 limit-text text-red">
+      The websocket that managing this chat is crap, so you are limited to 5 messages...
+      you can go again in: <span class="fw-700 f-12">{{messageTimer}}</span></div>
+    <form [formGroup]="chatForm" class="chat-form">
+      <div class="f-10 align-self-end mr-4"
+           [ngClass]="{'text-red' : chatForm.get('message')!.value?.length > messageLength}">
+        {{messageLength}}/{{chatForm.get('message')!.value ? chatForm.get('message')!.value.length : 0}}
+      </div>
+      <div class="d-flex col-11">
+        <div class="col-12">
+          <textarea #input
+                    id="a"
+                    type="text"
+                    placeholder="Write a message..."
+                    formControlName="message"
+                    class="chat-text-area" (keydown.control.enter)="submit(messageContainer, input)"></textarea>
+          <div class="f-10 text-grey3 position-relative b-1 l-1">Ctrl+Enter to send</div>
+        </div>
+        <button class="round-button-layout col-1 align-self-end"
+                [disabled]="chatForm.invalid|| messageCountLimit === 5 || spinner"
+                (click)="submit(messageContainer, input)">
+          <i *ngIf="!spinner" class="bi bi-send"></i>
+          <i *ngIf="spinner" class="bi bi-arrow-repeat spinner f-20"></i>
+        </button>
+      </div>
+    </form>
   </div>
 </div>

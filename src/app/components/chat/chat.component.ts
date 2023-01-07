@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import Pusher from "pusher-js";
 import { ChatService } from "../../services/chat.service";
 
@@ -11,66 +11,109 @@ import { ChatService } from "../../services/chat.service";
 export class ChatComponent implements OnInit {
 
   user: any;
+
   messages = [];
+
   chatForm: FormGroup;
-  messageCounter = 30;
-  messageCountLimit = 0;
-  messageLimit = 30;
+  messageTimer = 30;
+  messageCountLimit = -1;
+  messageLength = 100;
+  spinner = false;
+  newMessages = 0;
 
   constructor(private fb: FormBuilder,
               private chatService: ChatService) {
   }
 
   ngOnInit():void {
-    this.initForm();
     this.user = JSON.parse(sessionStorage.getItem('user')!);
+    this.initForm();
+    this.setPusher();
+  }
 
+  setPusher(): void {
     Pusher.logToConsole = true;
+    new Pusher('2adb81657a664e4db099', {cluster: 'eu'})
+      .subscribe('secret-killer')
+      .bind('message', (data: never) => {
 
-    const pusher = new Pusher('2adb81657a664e4db099', {
-      cluster: 'eu'
-    });
+        const messageContainer = document.getElementById('messageContainer');
+        const scrollClientHeightDeduction = messageContainer!.scrollHeight - messageContainer!.clientHeight;
+        const scrollBarTop = messageContainer!.scrollTop;
 
-    const channel = pusher.subscribe('secret-killer');
-    channel.bind('message', (data: never) => {
-     this.messages.push(data)
-    });
+        this.newMessages++ ;
+        this.messages.push(data);
+
+        setTimeout(() => {
+          const message = document.getElementById(`${this.messages.length - 1}`);
+          if (scrollClientHeightDeduction - scrollBarTop <= 200) {
+            message!.scrollIntoView(true);
+          }}, 1);
+      });
   }
 
   initForm(): void {
     this.chatForm = this.fb.group({
-      'message' : [null, [Validators.maxLength(30), Validators.required]],
-    })
+      'message' : [null, [Validators.maxLength(this.messageLength), Validators.required]],
+    });
   }
 
-  submit(): void {
+  submit(messageContainer: HTMLDivElement, input: HTMLTextAreaElement): void {
+    const messageControl = this.chatForm.get('message')!;
     if (this.chatForm.invalid) {
       return;
     }
-    this.messageCountLimit++
+    this.messageCountLimit++ ;
 
-    if (this.messageCountLimit === 6) {
-      this.limitMessage();
+    if (this.messageCountLimit === 5) {
+      this.limitMessageCount(messageControl, input);
       return;
     }
 
+    this.spinner = true;
+    messageControl.disable();
+
     this.chatService.sendChat({userName: this.user['user_name'], message: this.chatForm.get('message')?.value })
-      .subscribe(res => res)
-    this.chatForm.get('message')?.reset()
+      .subscribe(() => {
+        this.handleSubmit(messageControl, input, messageContainer);
+      })
   }
 
-  limitMessage() : void {
-    this.chatForm.get('message')?.reset();
-    this.chatForm.get('message')?.disable();
+  handleSubmit(messageControl: AbstractControl, input: HTMLTextAreaElement, messageContainer: HTMLDivElement): void {
+    this.spinner = false;
+    this.newMessages = 0;
+    messageContainer.scrollBy(0, messageContainer.scrollHeight);
+    messageControl.reset();
+    messageControl.enable();
+    input.focus();
+  }
+
+  limitMessageCount(messageControl: AbstractControl, input: HTMLTextAreaElement) : void {
+    messageControl.reset();
+    messageControl.disable();
     setTimeout(() => {
-      this.messageCountLimit = 0;
-      this.messageCounter = 30;
-      this.chatForm.get('message')?.enable();
+      this.messageTimer = 30;
+      this.messageCountLimit = -1;
+      messageControl.enable();
+      input.focus();
       clearInterval(interval);
-    }, 30000)
+    }, 30000);
     const interval = setInterval(() => {
-      this.messageCounter =  this.messageCounter - 1;
-    }, 1000)
+      this.messageTimer-- ;
+    }, 1000);
+  }
+
+  scroll(messageContainer: HTMLDivElement):void {
+    const scrollClientHeightDeduction = messageContainer.scrollHeight - messageContainer.clientHeight;
+    const scrollBarTop  = messageContainer.scrollTop;
+    if (scrollClientHeightDeduction - scrollBarTop <= 5) {
+      this.newMessages = 0;
+    }
+  }
+
+  down(messageContainer: HTMLDivElement):void {
+    this.newMessages = 0;
+    messageContainer.scrollBy(0, messageContainer.scrollHeight)
   }
 
 }

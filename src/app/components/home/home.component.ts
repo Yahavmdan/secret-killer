@@ -1,7 +1,7 @@
-import { Component, NgIterable, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { SessionGroupService } from "../../services/session-group.service";
-import { BehaviorSubject, Observable, Subject, Subscription, switchMap } from "rxjs";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   logout(): void {
     sessionStorage.removeItem('token');
-    void this.router.navigate(['login']);
+    sessionStorage.removeItem('user');
+    void this.router.navigate(['signin']);
   }
 
   getSessionGroups(): void {

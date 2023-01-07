@@ -31,36 +31,25 @@ export class UserService {
   signIn(data: { password: string, userName: string, email: string }): void {
     this.httpClient.post(`${this.apiURL}/sign-in`, data).toPromise()
       .then((res: any) => {
-        sessionStorage.setItem('token', res.token);
-        this.hasToken(sessionStorage.getItem('token'))
-          .then(void this.router.navigate(['home']))
-          .catch(err => {
-            console.log(err.error.message)
-          });
+        this.handleLogSignIn(res);
       })
   }
 
   login(data: { password: string, userName: string }): void {
     this.httpClient.post(`${this.apiURL}/login`, data).toPromise()
       .then((res: any) => {
-        sessionStorage.setItem('token', res.token);
-        sessionStorage.setItem('user', JSON.stringify(res.user));
-        this.hasToken(res.token)
-          .then(void this.router.navigate(['home']))
-          .catch(err => {
-            console.log(err.error.message)
-          })
+        this.handleLogSignIn(res);
       })
   }
 
-  storeSessionGroup(user: any): void {
-    this.httpClient.post(`${this.apiURL}/store/session`, user).toPromise()
-      .then((res: any) => res)
-  }
-
-  enterSessionGroup(user: any): void {
-    this.httpClient.post(`${this.apiURL}/enter/session`, user, { headers: this.header }).toPromise()
-      .then((res: any) => res)
+  handleLogSignIn(res: {user:object, token:string}):void {
+    sessionStorage.setItem('token', res.token);
+    sessionStorage.setItem('user', JSON.stringify(res.user));
+    this.hasToken(res.token)
+      .then(void this.router.navigate(['home']))
+      .catch(err => {
+        console.log(err.error.message)
+      });
   }
 
 }
