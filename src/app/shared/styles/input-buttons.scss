@@ -50,13 +50,13 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .round-button-layout:hover {
-  color: #3b3b3b;
-  background-color: $grey3;
+  color: #3b3b3b !important;
+  background-color: $grey3 !important;
 }
 .round-button-layout:disabled {
-  color: #696969;
-  border: 1px solid $grey3;
-  background-color: $gray4;
-  box-shadow: none;
-  cursor: default;
+  color: #696969 !important;
+  border: 1px solid $grey3 !important;
+  background-color: $gray4 !important;
+  box-shadow: none !important;
+  cursor: default !important;
 }

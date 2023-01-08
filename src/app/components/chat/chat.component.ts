@@ -12,7 +12,16 @@ export class ChatComponent implements OnInit {
 
   user: any;
 
-  messages = [];
+  messages = [
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+    // { userName: 'yahav' , message: 'wwow!@##@ jdsg f 3i44r8f nckiuds kjhsd  sd kjhdf', time: '22:45'},
+  ];
 
   chatForm: FormGroup;
   messageTimer = 30;
@@ -46,7 +55,7 @@ export class ChatComponent implements OnInit {
 
         setTimeout(() => {
           const message = document.getElementById(`${this.messages.length - 1}`);
-          if (scrollClientHeightDeduction - scrollBarTop <= 200) {
+          if (scrollClientHeightDeduction - scrollBarTop <= 300) {
             message!.scrollIntoView(true);
           }}, 1);
       });
