@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environmentUrl } from "../../environments/environment";
+import { User } from "../models/User";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SessionGroupService {
+export class SessionService {
 
   apiURL = environmentUrl.api;
 
@@ -20,7 +21,7 @@ export class SessionGroupService {
     return sessionStorage.getItem('token');
   }
 
-  getSessionGroup(): EventSource {
+  getSession(): EventSource {
     let source = new EventSource(`${this.apiURL}/get/sessions`);
     source.addEventListener('message', message => {
       console.log(message)
@@ -28,16 +29,17 @@ export class SessionGroupService {
     return source;
   }
 
-  storeSessionGroup(user: any): void {
-    this.httpClient.post(`${this.apiURL}/store/session`, user).toPromise()
+  storeSession(name: string, user: User): void {
+    const data = { userId: user.id, name: 'fdsdsdfsss4325345435ssssssss' }
+    this.httpClient.post(`${this.apiURL}/session/store`, data, { headers: this.header }).toPromise()
       .then((res: any) => res)
-      .catch((err) => {
-        console.log(err)})
+      .catch(err => err)
   }
 
-  enterSessionGroup(user: any): void {
+  enterSession(user: any): void {
     this.httpClient.post(`${this.apiURL}/enter/session`, user, { headers: this.header }).toPromise()
       .then((res: any) => res)
+      .catch(err => err)
   }
 
 }

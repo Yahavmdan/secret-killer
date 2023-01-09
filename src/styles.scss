@@ -26,9 +26,9 @@ $black: #1e1e1e;
 $grey: #333333;
 $grey2: #5e5e5e;
 $grey3: #868686;
-$gray4: #e5e5e5;
+$grey4: #e5e5e5;
 $grey5: #d2d2d2;
-$gray6: #f6f6f6;
+$grey6: #f6f6f6;
 $white: #ffffff;
 
 ////////////// main container ////////////////
@@ -44,7 +44,7 @@ $white: #ffffff;
 /////////////////////////////////////////////
 
 .spinner {
-  animation: rotate-center 1.3s linear infinite both;
+  animation: rotate-center 1s linear infinite both;
 }
 
 @keyframes rotate-center {
@@ -197,8 +197,8 @@ $white: #ffffff;
 .bg-black {background-color: $black  !important;}
 .bg-grey {background-color: $grey  !important;}
 .bg-light-grey {background-color: $grey3  !important;}
-.bg-lighter-grey {background-color: $gray4  !important;}
-.bg-lighter-lighter-grey {background-color: $gray4  !important;}
+.bg-lighter-grey {background-color: $grey4 !important;}
+.bg-lighter-lighter-grey {background-color: $grey4 !important;}
 .bg-white {background-color: $white  !important;}
 
 ///////////////// colors ////////////////////
@@ -216,9 +216,9 @@ $white: #ffffff;
 .text-grey {color: $grey  !important;}
 .text-grey2 {color: $grey2  !important;}
 .text-grey3 {color: $grey3  !important;}
-.text-grey4 {color: $gray4  !important;}
+.text-grey4 {color: $grey4 !important;}
 .text-grey5 {color: $grey5  !important;}
-.text-grey6 {color: $gray6  !important;}
+.text-grey6 {color: $grey6 !important;}
 .text-white {color: $white  !important;}
 
 ///////////////// fonts /////////////////////

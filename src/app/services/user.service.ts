@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { environmentUrl } from "../../environments/environment";
+import { User } from "../models/User";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +12,6 @@ export class UserService {
 
   apiURL = environmentUrl.api;
 
-    header = {
-    Accept: 'application/json',
-    Authorization: `Bearer ${this.token}`,
-  };
-
   constructor(private httpClient: HttpClient,
               private router: Router) {}
 
@@ -22,10 +19,10 @@ export class UserService {
     return sessionStorage.getItem('token');
   }
 
-  hasToken(token: string | null): Promise<boolean> {
-    return this.httpClient.post(`${this.apiURL}/check/token`, token).toPromise()
-      .then(res => res)
-      .catch(err => err)
+  hasToken(user: User): Observable<boolean> {
+    const data = {token: this.token, userId: user.id};
+    // @ts-ignore
+    return this.httpClient.post(`${this.apiURL}/check/token`, data)
   }
 
   signIn(data: { password: string, userName: string, email: string }): void {
@@ -35,21 +32,17 @@ export class UserService {
       })
   }
 
-  login(data: { password: string, userName: string }): void {
+  login(data: { password: string, emailOrUserName: string }): void {
     this.httpClient.post(`${this.apiURL}/login`, data).toPromise()
       .then((res: any) => {
         this.handleLogSignIn(res);
       })
   }
 
-  handleLogSignIn(res: {user:object, token:string}):void {
+  handleLogSignIn(res: User): void {
     sessionStorage.setItem('token', res.token);
-    sessionStorage.setItem('user', JSON.stringify(res.user));
-    this.hasToken(res.token)
-      .then(void this.router.navigate(['home']))
-      .catch(err => {
-        console.log(err.error.message)
-      });
+    sessionStorage.setItem('user', JSON.stringify(res));
+    void this.router.navigate(['home'])
   }
 
 }

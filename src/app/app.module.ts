@@ -5,18 +5,18 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterLink, RouterOutlet } from "@angular/router";
 import { AppRoutingModule } from "./app-routing.module";
-import { HomeComponent } from './components/home/home.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ChatComponent } from './components/chat/chat.component';
+import { HomeComponent } from "./components/home/home.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     SignInComponent,
-    ChatComponent
+    ChatComponent,
+    HomeComponent
   ],
 
   imports: [
@@ -29,13 +29,12 @@ import { ChatComponent } from './components/chat/chat.component';
     RouterLink
   ],
 
-  providers: [
-
-  ],
+  providers: [],
 
   bootstrap: [
     AppComponent
   ]
 
 })
-export class AppModule {}
+export class AppModule {
+}

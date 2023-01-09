@@ -3,9 +3,9 @@
     <div class="messages-container" id="messageContainer" #messageContainer (scroll)="scroll(messageContainer)">
       <div *ngFor="let message of messages; let i = index"
            [id]="i"
-           [ngClass]="message['userName'] == user['user_name'] ? 'own-chat-message' : 'chat-message'">
+           [ngClass]="message['userName'] == user.userName ? 'own-chat-message' : 'chat-message'">
         <div class="d-flex flex-column">
-          <div *ngIf="message['userName'] !== user['user_name']"
+          <div *ngIf="message['userName'] !== user.userName"
                class="fw-700 f-16">{{message!['userName']}}</div>
           <div class="message-body f-13 fw-400">{{message!['message']}}</div>
         </div>
@@ -24,12 +24,12 @@
           *ngIf="(messageContainer.scrollHeight - messageContainer.clientHeight) - messageContainer.scrollTop !>= 200"
           class="round-button-layout bg-blue position-relative l-2 t-3"
           (click)="down(messageContainer)">
-      <div *ngIf="newMessages > 0"
-            class="notification-dot bg-red position-absolute mb-4 ml-4 f-10">
-        {{newMessages}}</div>
+          <div *ngIf="newMessages > 0"
+               class="notification-dot bg-red position-absolute mb-4 ml-4 f-10">
+            {{newMessages}}</div>
           <i class="bi bi-chevron-double-down"></i>
         </button>
-        <div class="f-10 mr-4 align-self-end"
+        <div class="f-10 mr-4 align-self-end text-grey2"
              [ngClass]="{'text-red' : chatForm.get('message')!.value?.length > messageLength}">
           {{messageLength}}/{{chatForm.get('message')!.value ? chatForm.get('message')!.value.length : 0}}
         </div>
@@ -37,18 +37,19 @@
       <div class="d-flex col-11">
         <div class="col-12">
           <textarea #input
+                    [ngClass]="(messageContainer.scrollHeight - messageContainer.clientHeight) - messageContainer.scrollTop >= 200 ? 'pl-4' : 'pl-1'"
                     id="a"
                     type="text"
                     placeholder="Write a message..."
                     formControlName="message"
-                    class="chat-text-area" (keydown.control.enter)="submit(messageContainer, input)"></textarea>
+                    class="text-area" (keydown.control.enter)="submit(messageContainer, input)"></textarea>
           <div class="f-10 text-grey3 position-relative b-1 l-1">Ctrl+Enter to send</div>
         </div>
         <button class="round-button-layout bg-blue col-1 align-self-end"
-                [disabled]="chatForm.invalid|| messageCountLimit === 5 || spinner"
+                [disabled]="chatForm.invalid|| messageCountLimit === 5 || tinySpinner"
                 (click)="submit(messageContainer, input)">
-          <i *ngIf="!spinner" class="bi bi-send"></i>
-          <i *ngIf="spinner" class="bi bi-arrow-repeat spinner f-20"></i>
+          <i *ngIf="!tinySpinner" class="bi bi-send"></i>
+          <i *ngIf="tinySpinner" class="bi bi-arrow-repeat spinner f-22"></i>
         </button>
       </div>
     </form>

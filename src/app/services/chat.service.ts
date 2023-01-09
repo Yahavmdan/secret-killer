@@ -21,8 +21,9 @@ export class ChatService {
     return sessionStorage.getItem('token');
   }
 
-  sendChat(data: { userName: any, message: any }): Observable<any> {
-    return this.httpClient.post(`${this.apiURL}/messages`, data)
+  sendChat(userName: string, message: string ): Observable<any> {
+    const data = { userName, message }
+    return this.httpClient.post(`${this.apiURL}/messages`, data, { headers: this.header })
   }
 
 }
