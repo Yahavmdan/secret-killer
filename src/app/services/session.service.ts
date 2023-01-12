@@ -30,7 +30,7 @@ export class SessionService {
   }
 
   storeSession(name: string, user: User): void {
-    const data = { userId: user.id, name: 'fdsdsdfsss4325345435ssssssss' }
+    const data = { userId: user.id, name: name }
     this.httpClient.post(`${this.apiURL}/session/store`, data, { headers: this.header }).toPromise()
       .then((res: any) => res)
       .catch(err => err)

@@ -1,20 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
 import { User } from "../../models/User";
 import { SessionService } from "../../services/session.service";
 import { ActiveUserService } from "../../services/active-user.service";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   user: User;
-  sub: Subscription = new Subscription();
-  groups!:EventSource[];
 
 
   constructor(private router: Router,
@@ -34,12 +32,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   getSessionGroups(): void {
   }
 
-  storeSessionGroup(name: string): void {
-    this.sessionService.storeSession(name, this.user)
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+  storeSessionGroup(): void {
+    //
   }
 
 }

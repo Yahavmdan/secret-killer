@@ -15,14 +15,18 @@ export class UserService {
   constructor(private httpClient: HttpClient,
               private router: Router) {}
 
-  get token(): string | null {
-    return sessionStorage.getItem('token');
+  getHeader(): object {
+    const token = sessionStorage.getItem('token');
+    return {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
   }
 
   hasToken(user: User): Observable<boolean> {
-    const data = {token: this.token, userId: user.id};
+    const data = {token: sessionStorage.getItem('token'), userId: user.id};
     // @ts-ignore
-    return this.httpClient.post(`${this.apiURL}/check/token`, data)
+    return this.httpClient.post(`${this.apiURL}/check/token`, data, {headers: this.getHeader()})
   }
 
   signIn(data: { password: string, userName: string, email: string }): void {
