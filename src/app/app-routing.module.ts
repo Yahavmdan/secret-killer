@@ -1,26 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
-import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { HomeComponent } from "./components/home/home.component";
-import { LoginComponent } from "./components/login/login.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { LoginComponent } from "./components/user/login/login.component";
+import { SignUpComponent } from "./components/user/sign-up/sign-up.component";
+import { SessionComponent } from "./components/session/session.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   },
   {
-    path: 'signin',
-    component: SignInComponent,
+    path: 'signup',
+    component: SignUpComponent,
     pathMatch: 'full'
   },
   {
-    path: '',
+    path: 'login',
     component: LoginComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'session/:id',
+    component: SessionComponent,
+    //todo session guard
   },
 ]
 

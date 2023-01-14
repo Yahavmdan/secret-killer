@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import Pusher from "pusher-js";
 import { ChatService } from "../../services/chat.service";
 import { ActiveUserService } from "../../services/active-user.service";
 import { User } from "../../models/User";
+import { PusherService } from "../../services/pusher.service";
 
 
 @Component({
@@ -34,7 +34,8 @@ export class ChatComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private chatService: ChatService,
-              private activeUserService: ActiveUserService) {
+              private activeUserService: ActiveUserService,
+              private pusher: PusherService) {
   }
 
   ngOnInit(): void {
@@ -44,11 +45,7 @@ export class ChatComponent implements OnInit {
   }
 
   setPusher(): void {
-    Pusher.logToConsole = true;
-    new Pusher('2adb81657a664e4db099', {cluster: 'eu'})
-      .subscribe('secret-killer')
-      .bind('message', (data: never) => {
-
+    this.pusher.connection.bind('message', (data: never) => {
         const messageContainer = document.getElementById('messageContainer');
         const scrollClientHeightDeduction = messageContainer!.scrollHeight - messageContainer!.clientHeight;
         const scrollBarTop = messageContainer!.scrollTop;

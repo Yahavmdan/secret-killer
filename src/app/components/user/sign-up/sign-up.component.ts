@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
+import { UserService } from "../../../services/user.service";
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class SignUpComponent implements OnInit {
 
   signInForm!: FormGroup;
 
@@ -29,11 +29,11 @@ export class SignInComponent implements OnInit {
     if (!this.signInForm.valid) {
       return;
     }
-    this.userService.signIn(this.signInForm.getRawValue());
+    this.userService.signUp(this.signInForm.getRawValue());
   }
 
   navigate(): void {
-    void this.router.navigate(['']);
+    void this.router.navigate(['login']);
   }
 
 }

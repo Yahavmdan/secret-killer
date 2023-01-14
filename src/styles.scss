@@ -1,14 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-//todo make css file for buttons and inputs
-//todo make generic service
 //todo fix all inline style
-//todo make css file for buttons and inputs
-//todo make generic service socket
-//todo get rid of wrapper div
-//todo find better solution for scrollbar
 
 
 ///////////////// variables /////////////////
@@ -31,13 +24,27 @@ $grey5: #d2d2d2;
 $grey6: #f6f6f6;
 $white: #ffffff;
 
-////////////// main container ////////////////
+///////////////// containers /////////////////
 /////////////////////////////////////////////
 
 .main-container {
-  padding: 20px;
+  padding: 5em 2em 3em 2em;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-container {
+  width: 600px;
+  background-color: #fafffe;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 15px 29px 0 #DBDBDB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 ///////////////// helpers ///////////////////
@@ -53,8 +60,8 @@ $white: #ffffff;
   }
 }
 
-
 .notification-dot {
+  position: absolute;
   min-height: 15px;
   min-width: 15px;
   max-height: 15px;
@@ -81,16 +88,6 @@ $white: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.form-container {
-  background-color: #fafffe;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 15px 29px 0 #DBDBDB;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 ///////////////// positions //////////////////
@@ -196,9 +193,11 @@ $white: #ffffff;
 .bg-light-blue {background-color: $light-blue  !important;}
 .bg-black {background-color: $black  !important;}
 .bg-grey {background-color: $grey  !important;}
-.bg-light-grey {background-color: $grey3  !important;}
-.bg-lighter-grey {background-color: $grey4 !important;}
-.bg-lighter-lighter-grey {background-color: $grey4 !important;}
+.bg-grey2 {background-color: $grey2  !important;}
+.bg-grey3 {background-color: $grey3  !important;}
+.bg-grey4 {background-color: $grey4  !important;}
+.bg-grey5 {background-color: $grey5  !important;}
+.bg-grey6 {background-color: $grey6  !important;}
 .bg-white {background-color: $white  !important;}
 
 ///////////////// colors ////////////////////
@@ -241,6 +240,12 @@ $white: #ffffff;
 .f-24 {font-size: 24px;}
 .f-26 {font-size: 26px;}
 .f-28 {font-size: 28px;}
+.f-30 {font-size: 30px;}
+.f-32 {font-size: 32px;}
+.f-34 {font-size: 34px;}
+.f-36 {font-size: 36px;}
+.f-38 {font-size: 38px;}
+.f-40 {font-size: 40px;}
 
 ///////////////// Weights /////////////////////
 /////////////////////////////////////////////
@@ -271,6 +276,7 @@ $white: #ffffff;
   .f-lg-26 {font-size: 26px;}
   .f-lg-28 {font-size: 28px;}
 }
+
 @media (max-width: 768px) {
   .f-md-8 {font-size: 8px;}
   .f-md-10 {font-size: 10px;}
@@ -283,11 +289,8 @@ $white: #ffffff;
   .f-md-24 {font-size: 24px;}
   .f-md-26 {font-size: 26px;}
   .f-md-28 {font-size: 28px;}
-
-  .main-container {
-    margin-top: 3rem;
-  }
 }
+
 @media (max-width: 512px) {
 
   .f-sm-8 {font-size: 8px;}
@@ -301,11 +304,6 @@ $white: #ffffff;
   .f-sm-24 {font-size: 24px;}
   .f-sm-26 {font-size: 26px;}
   .f-sm-28 {font-size: 28px;}
-
-  .items-container {
-    width: 100%;
-    padding: 0 1rem 0 1rem;
-  }
 
   .button-layout {
     font-size: 10px;

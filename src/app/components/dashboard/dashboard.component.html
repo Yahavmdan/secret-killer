@@ -1,0 +1,28 @@
+<div class="main-container">
+  <form [formGroup]="sessionForm" (submit)="storeSession()" class="form-container">
+    <label class="align-self-start text-grey2 f-14 mx-2 my-2">Create session</label>
+    <div class="d-flex flex-row col-12">
+      <button type="submit" class="button-layout bg-blue mx-1">Create session</button>
+      <input class="input mx-1" placeholder="Session name" formControlName="name">
+    </div>
+  </form>
+
+  <label class="text-grey2 f-14 mt-5">Active sessions</label>
+  <div class="d-flex flex-wrap">
+    <div *ngFor="let session of sessions">
+      <div class="session-card">
+        <i *ngIf="session.creator_id === user.id"
+           class="notification-dot bg-grey2 d-flex position-relative b-2 r-2 justify-content-center">
+          <i class="bi bi-x f-16 pointer align-self-center text-white" (click)="deleteSession(session.id)"></i>
+        </i>
+        <div class="session-name">{{session.name}}</div>
+        <div class="session-info">Creator: {{session.creator_name}}</div>
+        <div class="session-info">{{session.created_at}}</div>
+        <button class="button-layout bg-green" (click)="enterSession(session.id)">Enter session</button>
+      </div>
+    </div>
+  </div>
+
+  <!--  <app-chat style="width: 400px; height: 500px;"></app-chat>-->
+
+</div>

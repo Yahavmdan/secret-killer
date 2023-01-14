@@ -1,8 +1,0 @@
-<form [formGroup]="loginForm" (submit)="submit()" class="form-container">
-  <input type="text" name="emailOrUserName" class="my-2 col-4 form-control" formControlName="emailOrUserName" placeholder="Email or username">
-  <input type="password" name="password" class="my-2 col-4 form-control" formControlName="password" placeholder="Password">
-  <div class="d-flex align-items-center">
-    <button class="button-layout bg-blue my-1" type="submit">Submit</button>
-    <div class="my-1 pointer f-14 text-blue mx-1" (click)="signIn()">Sign-in</div>
-  </div>
-</form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
+import { UserService } from "../../../services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  signIn(): void {
-    void this.router.navigate(['signin']);
+  signUp(): void {
+    void this.router.navigate(['signup']);
   }
 
   submit(): void  {

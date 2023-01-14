@@ -1,6 +1,26 @@
-<button (click)="logout()" class="button-layout bg-red">Log-out</button>
-<input class="input" placeholder="Session name">
-<button (click)="storeSessionGroup()" class="button-layout bg-blue">Create session</button>
-<div style="width: 450px; height: 500px;">
-  <app-chat></app-chat>
+<div class="main-container home-background">
+  <div class="f-40 fw-700 text-grey5">Secret Killer</div>
+  <div class="description text-grey5">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, ut labore et dolore</p>
+    <p>magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+    <p>consequat. Duis aute irure dolor in reprehenderit in voluptate sed do eiusmod tempor  velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa  officia deserunt mollit anim id est laborum.</p>
+    <p>molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+    <p>quaerat voluptatem. Ut enim ad minima veniam,</p>
+    <p>magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ut aliquip ex ea commodo</p>
+  </div>
+  <div class="home-buttons-container">
+    <button *ngIf="!user" class="button-layout bg-white text-grey fw-700 f-34 col-1 mr-5 d-flex align-items-center"
+            [routerLink]="'/login'">
+      Login
+    </button>
+    <button *ngIf="!user" class="button-layout bg-white text-grey fw-700 f-34 col-1 ml-5 d-flex align-items-center"
+            [routerLink]="'/signup'">
+      Sign-up
+    </button>
+    <button *ngIf="user" class="button-layout bg-white text-grey fw-700 f-34 col-1 ml-5 d-flex align-items-center"
+            [routerLink]="'/dashboard'">
+      Dashboard
+    </button>
+  </div>
 </div>

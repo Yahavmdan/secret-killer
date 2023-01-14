@@ -1,0 +1,23 @@
+@import "src/styles.scss";
+@import "app/shared/styles/input-buttons.scss";
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  background: $blue;
+  width: 200px;
+  height: 100px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px 5px 0 0;
+}
+
+.session-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.session-info {
+  font-size: 12px;
+  font-weight: 500;
+}

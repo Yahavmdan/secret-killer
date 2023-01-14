@@ -1,0 +1,42 @@
+<nav #navbar class="nav-bar">
+  <div #navToggle (click)="activeNav(navbar, navToggle)" class="nav-toggle">
+    <i class="d-md-none d-flex bi bi-box-arrow-down-right"></i>
+  </div>
+
+  <div (click)="navigate(navbar, navToggle, [''])" class="nav-logo">Secret<i class="bi bi-incognito mx-1"></i>Killer</div>
+
+  <div class="links-container">
+
+
+    <div class="navigation-links">
+      <div (click)="navigate(navbar, navToggle, [''])" class="pointer me-3 ms-md-3 d-flex">
+        <div *ngIf="navBarActive">Home</div>
+      </div>
+      <div (click)="navigate(navbar, navToggle, ['/dashboard'])" class="pointer me-3">
+        <div *ngIf="navBarActive">Dashboard</div>
+      </div>
+    </div>
+
+
+    <div class="account-links">
+
+      <div *ngIf="!user" (click)="navigate(navbar, navToggle, ['/login'])" class="pointer me-3 f-md-12">
+        <div *ngIf="navBarActive">Login</div>
+      </div>
+      <div *ngIf="user" (click)="logout(navbar)" class="pointer me-0 me-md-3">
+        <div *ngIf="navBarActive"><i class="bi bi-box-arrow-left"></i></div>
+      </div>
+      <div *ngIf="!user" (click)="navigate(navbar, navToggle, ['/signup'])" class="pointer me-0 me-md-3 f-md-12">
+        <div *ngIf="navBarActive">Signup</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</nav>
+
+
+<div (click)="navigate(navbar, navToggle)" *ngIf="navBarActive && blurOverlay" class="blur-overlay"></div>
+
+
