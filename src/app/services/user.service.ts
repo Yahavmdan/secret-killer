@@ -40,7 +40,7 @@ export class UserService {
   handleLogSignIn(res: User): void {
     sessionStorage.setItem('token', res.token);
     sessionStorage.setItem('user', JSON.stringify(res));
-    void this.router.navigate(['home'])
+    void this.router.navigate([''])
   }
 
 }
