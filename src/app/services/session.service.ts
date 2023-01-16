@@ -29,14 +29,8 @@ export class SessionService {
     const data = { userId: user.id, name: name }
     return this.httpClient.post(`${this.apiURL}/session/store`, data, { headers: this.auth.setHeader() })
       .toPromise()
-      .then(res => {
-        console.log(res)
-        return res as Session
-      })
-      .catch(err => {
-        console.log(err)
-        return err
-      })
+      .then(res => res as Session)
+      .catch(err => err)
   }
 
   delete(sessionId: number, user: User): Promise<any> {
@@ -47,8 +41,9 @@ export class SessionService {
       .catch(err => err)
   }
 
-  enter(sessionId: number): Promise<any> {
-    return this.httpClient.post(`${this.apiURL}/enter/session`, sessionId, { headers: this.auth.setHeader() })
+  enter(sessionId: number, userId: number): Promise<any> {
+    const data = { sessionId, userId }
+    return this.httpClient.post(`${this.apiURL}/session/enter`, data, {headers: this.auth.setHeader()})
       .toPromise()
       .then((res: any) => res)
       .catch(err => err)

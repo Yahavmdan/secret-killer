@@ -9,6 +9,6 @@ export class PusherService {
   connection = new Pusher('2adb81657a664e4db099', {cluster: 'eu'}).subscribe('secret-killer');
 
   constructor() {
-    Pusher.logToConsole = true;
+    Pusher.logToConsole = false;
   }
 }

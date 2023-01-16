@@ -73,8 +73,9 @@ export class DashboardComponent implements OnInit {
   }
 
   enterSession(sessionId: number): void {
-    void this.router.navigate(['session/' + sessionId])
-    void this.sessionService.enter(sessionId);
+    this.sessionService.enter(sessionId, this.user.id)
+      .then(res => void this.router.navigate(['session/' + sessionId]))
+      .catch(err => alert(err.error.message));
   }
 
 }
