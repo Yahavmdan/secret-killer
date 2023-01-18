@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
       .then(res => {
         if (res.creator_id === this.user.id) {
           this.sessionForm.get('name')?.reset();
+          void this.sessionService.enter(res.id, this.user.id)
           void this.router.navigate(['session/' + res.id])
           return;
         }
@@ -74,7 +75,7 @@ export class DashboardComponent implements OnInit {
 
   enterSession(sessionId: number): void {
     this.sessionService.enter(sessionId, this.user.id)
-      .then(res => void this.router.navigate(['session/' + sessionId]))
+      .then(() => void this.router.navigate(['session/' + sessionId]))
       .catch(err => alert(err.error.message));
   }
 

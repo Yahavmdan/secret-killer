@@ -16,7 +16,8 @@ export class SessionService {
               private auth: AuthService) {}
 
   get(): Promise<Session[]> {
-    return this.httpClient.get(`${this.apiURL}/sessions/index`, {headers: this.auth.setHeader()})
+    return this.httpClient
+      .get(`${this.apiURL}/sessions/index`, {headers: this.auth.setHeader()})
       .toPromise()
       .then(res => res as Session[])
       .catch(err => {
@@ -27,7 +28,8 @@ export class SessionService {
 
   store(name: string, user: User): Promise<Session | any> {
     const data = { userId: user.id, name: name }
-    return this.httpClient.post(`${this.apiURL}/session/store`, data, { headers: this.auth.setHeader() })
+    return this.httpClient
+      .post(`${this.apiURL}/session/store`, data, { headers: this.auth.setHeader() })
       .toPromise()
       .then(res => res as Session)
       .catch(err => err)
@@ -35,7 +37,8 @@ export class SessionService {
 
   delete(sessionId: number, user: User): Promise<any> {
     const data = { sessionId, user }
-    return this.httpClient.post(`${this.apiURL}/session/delete`, data, {headers: this.auth.setHeader()})
+    return this.httpClient
+      .post(`${this.apiURL}/session/delete`, data, {headers: this.auth.setHeader()})
       .toPromise()
       .then((res: any) => res)
       .catch(err => err)
@@ -43,14 +46,27 @@ export class SessionService {
 
   enter(sessionId: number, userId: number): Promise<any> {
     const data = { sessionId, userId }
-    return this.httpClient.post(`${this.apiURL}/session/enter`, data, {headers: this.auth.setHeader()})
+    return this.httpClient
+      .post(`${this.apiURL}/session/enter`, data, {headers: this.auth.setHeader()})
       .toPromise()
       .then((res: any) => res)
       .catch(err => err)
   }
 
-  exit(): void {
-    //
+  getSessionByUserId(userId: number): Promise<Session> {
+    return this.httpClient
+      .get(`${this.apiURL}/session/${userId}`, {headers: this.auth.setHeader()})
+      .toPromise()
+      .then((res: any) => res)
+      .catch(err => err)
+  }
+
+  exit(userId: number): Promise<Session> {
+    return this.httpClient
+      .delete(`${this.apiURL}/session/exit/${userId}`, {headers: this.auth.setHeader()})
+      .toPromise()
+      .then((res: any) => res)
+      .catch(err => err)
   }
 
 }

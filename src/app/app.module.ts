@@ -13,6 +13,7 @@ import { LoginComponent } from "./components/user/login/login.component";
 import { SignUpComponent } from "./components/user/sign-up/sign-up.component";
 import { SessionComponent } from './components/session/session.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SessionResolver } from "./resolves/session.resolver";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     RouterLink
   ],
 
-  providers: [],
+  providers: [SessionResolver],
 
   bootstrap: [
     AppComponent

@@ -16,7 +16,8 @@ export class ChatService {
 
   sendChat(userName: string, message: string ): Observable<any> {
     const data = { userName, message }
-    return this.httpClient.post(`${this.apiURL}/messages`, data, { headers: this.authService.setHeader() })
+    return this.httpClient
+      .post(`${this.apiURL}/messages`, data, { headers: this.authService.setHeader() })
   }
 
 }

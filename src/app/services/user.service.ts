@@ -20,18 +20,21 @@ export class UserService {
   hasToken(user: User): Observable<boolean> {
     const data = {token: sessionStorage.getItem('token'), userId: user.id};
     // @ts-ignore
-    return this.httpClient.post(`${this.apiURL}/check/token`, data, {headers: this.auth.setHeader()})
+    return this.httpClient
+      .post(`${this.apiURL}/check/token`, data, {headers: this.auth.setHeader()})
   }
 
   signUp(data: { password: string, userName: string, email: string }): void {
-    this.httpClient.post(`${this.apiURL}/signup`, data).toPromise()
+    this.httpClient
+      .post(`${this.apiURL}/signup`, data).toPromise()
       .then((res: any) => {
         this.handleLogSignIn(res);
       })
   }
 
   login(data: { password: string, emailOrUserName: string }): void {
-    this.httpClient.post(`${this.apiURL}/login`, data).toPromise()
+    this.httpClient
+      .post(`${this.apiURL}/login`, data).toPromise()
       .then((res: any) => {
         this.handleLogSignIn(res);
       })
