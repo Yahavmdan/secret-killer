@@ -61,9 +61,18 @@ export class SessionService {
       .catch(err => err)
   }
 
-  exit(userId: number): Promise<Session> {
+  getUsersSessionById(sessionId: number): Promise<User[]> {
     return this.httpClient
-      .delete(`${this.apiURL}/session/exit/${userId}`, {headers: this.auth.setHeader()})
+      .get(`${this.apiURL}/sessions/${sessionId}`, {headers: this.auth.setHeader()})
+      .toPromise()
+      .then((res: any) => res)
+      .catch(err => err)
+  }
+
+  exit(userId: number, sessionId: number): Promise<Session> {
+    const data = { sessionId, userId }
+    return this.httpClient
+      .post(`${this.apiURL}/session/exit`, data, {headers: this.auth.setHeader()})
       .toPromise()
       .then((res: any) => res)
       .catch(err => err)

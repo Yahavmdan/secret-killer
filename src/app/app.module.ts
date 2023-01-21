@@ -38,7 +38,9 @@ import { SessionResolver } from "./resolves/session.resolver";
     RouterLink
   ],
 
-  providers: [SessionResolver],
+  providers: [
+    SessionResolver
+  ],
 
   bootstrap: [
     AppComponent

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ChatService } from "../../services/chat.service";
 import { ActiveUserService } from "../../services/active-user.service";
@@ -11,7 +11,10 @@ import { PusherService } from "../../services/pusher.service";
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnChanges {
+
+  @Input() disabled: boolean;
+  @Input() users: User[];
 
   user: User;
   chatForm: FormGroup;
@@ -44,6 +47,20 @@ export class ChatComponent implements OnInit {
     this.setPusher();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    this.changeDisabled(changes['disabled']?.currentValue);
+    this.changeUsers(changes['users']?.currentValue);
+  }
+
+  changeDisabled(disabled: boolean) : void {
+    this.disabled = disabled;
+    this.disabled ? this.chatForm?.get('message')?.disable() : this.chatForm?.get('message')?.enable()
+  }
+
+  changeUsers(users: User[]) : void {
+    this.users = users;
+  }
+
   setPusher(): void {
     this.pusher.connection.bind('message', (data: never) => {
         const messageContainer = document.getElementById('messageContainer');
@@ -51,7 +68,11 @@ export class ChatComponent implements OnInit {
         const scrollBarTop = messageContainer!.scrollTop;
 
         this.newMessages++;
-        this.messages.push(data);
+        this.users.forEach(user => {
+          if (user.userName === data['userName']) {
+            this.messages.push(data);
+          }
+        })
 
         setTimeout(() => {
           const message = document.getElementById(`${this.messages.length - 1}`);

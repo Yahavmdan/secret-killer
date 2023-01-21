@@ -1,6 +1,16 @@
 <div class="main-container">
-  <button (click)="exitSession()" class="position-absolute round-button-layout r-0 bg-danger mr-4">
-    <i class="bi bi-box-arrow-left mr-1"></i>
-  </button>
-  <app-chat class="chat-container"></app-chat>
+  <div class="d-flex w-100 justify-content-between">
+    <div class="d-flex">
+      <app-chat [disabled]="disabled" [users]="users" class="chat-container"></app-chat>
+      <div class="d-flex flex-column ml-2">
+        <label class="text-grey3 fw-400">Users in session</label>
+        <div class="text-grey3 fw-300" *ngFor="let user of users">
+          {{user.userName}}
+        </div>
+      </div>
+    </div>
+    <button (click)="exitSession()" class="round-button-layout bg-danger">
+      <i class="bi bi-box-arrow-left mr-1"></i>
+    </button>
+  </div>
 </div>

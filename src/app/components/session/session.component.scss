@@ -2,12 +2,11 @@
 @import "app/shared/styles/input-buttons.scss";
 
 .chat-container {
-  height: 87vh;
+  height: 85vh;
   width: 300px;
   padding: 5px;
   border-radius: 5px;
-  position: absolute;
-  top: 60px;
-  left: 0;
   background-color: $grey6;
+  position: relative;
+  top: -22px;
 }

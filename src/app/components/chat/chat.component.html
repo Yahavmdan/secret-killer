@@ -46,7 +46,7 @@
           <div class="f-10 text-grey3 position-relative b-1 l-1">Ctrl+Enter to send</div>
         </div>
         <button class="round-button-layout bg-blue col-1 align-self-end"
-                [disabled]="chatForm.invalid|| messageCountLimit === 5 || tinySpinner"
+                [disabled]="chatForm.invalid|| messageCountLimit === 5 || tinySpinner || disabled"
                 (click)="submit(messageContainer, input)">
           <i *ngIf="!tinySpinner" class="bi bi-send"></i>
           <i *ngIf="tinySpinner" class="bi bi-arrow-repeat spinner f-22"></i>
